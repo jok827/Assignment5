@@ -68,6 +68,16 @@ expr_tree = tn.treenode('*',
                                                 tn.treenode(3.0, None, None)))))
 
 
+bin_tree = tn.treenode(5,
+                       tn.treenode(2,
+                                   tn.treenode(1),
+                                   tn.treenode(3)),
+                       tn.treenode(8,
+                                   tn.treenode(7,
+                                               tn.treenode(6)),
+                                   tn.treenode(9)))
+
+
 #TESTING FOR SUBST####################################################################
 
 q2.subst(expr_tree,'*','-')
@@ -109,5 +119,49 @@ if expr_tree_copy is expr_tree:
 
 if not expr_tree_copy.right == expr_tree.right:
     print(f'Error in copy, Expected: {expr_tree.right} Result: {expr_tree_copy.right}')
+
+#####################################################################################
+
+
+#TESTING FOR COLLECT_DATA_INORDER#####################################################
+
+mtree_list = q2.collect_data_inorder(mtree)
+if not mtree_list == []:
+    print(f'Error in copy with empty tree, Expected: None Result: {mtree_list}')
+
+
+ctree_list = q2.collect_data_inorder(ctree)
+if not ctree_list[0] == 'c':
+    print(f'Error in copy with empty tree, Expected: c Result: {ctree_list}')
+
+
+
+bin_tree_list = q2.collect_data_inorder(bin_tree)
+bin_tree_copy_list = q2.collect_data_inorder(q2.copy(bin_tree))
+bin_tree_copy_list.sort()
+for item in range(len(bin_tree_list)):
+    if not bin_tree_list[item] == bin_tree_copy_list[item]:
+        print(f'Error in copy, Expected: {bin_tree_list[item]} Result: {bin_tree_copy_list[item]}')
+#####################################################################################
+
+#TESTING COUNT_SMALLER###############################################################
+
+
+def run_test(function_name,expected, actual):
+    if expected != actual:
+        print(f'Error in {function_name}, Expected: {str(actual)} Result: {str(expected)}')
+
+
+expected = 3
+actual = q2.count_smaller(bin_tree, 5)
+run_test("count_small", expected, actual)
+
+expected = 0
+actual = q2.count_smaller(mtree, 5)
+run_test("count_small", expected, actual)
+
+expected = 1
+actual = q2.count_smaller(ctree, "z")
+run_test("count_small", expected, actual)
 
 #####################################################################################

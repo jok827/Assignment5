@@ -102,10 +102,38 @@ def collect_data_inorder(tnode):
          Returns: A list of treenode data in order'''
 
     if tnode is None:
-        return None
+        return []
+
 
     else:
 
-        treeList = [collect_data_inorder(tnode.left),tnode.data,collect_data_inorder(tnode.right)]
+        treeList = []
+        treeList.extend(collect_data_inorder(tnode.left))
+        treeList.append(tnode.data)
+        treeList.extend(collect_data_inorder(tnode.right))
+
+
 
         return treeList
+
+
+def count_smaller(tnode, target):
+
+    '''Purpose: To substitute a target value t with a replacement value r wherever it
+     appears in the given tree
+
+     Pre-conditions: A target data value, a replacement value, a treenode
+
+     Post-conditions: Modifies tree node
+
+     Returns: None'''
+
+    if tnode is None:
+        return 0
+    else:
+        vals = count_smaller(tnode.left, target) + count_smaller(tnode.right, target)
+
+        if tnode.data < target:
+            return 1 + vals
+        else:
+            return 0 + vals
