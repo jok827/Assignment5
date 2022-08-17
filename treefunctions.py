@@ -1,4 +1,16 @@
-from treenode import  treenode
+# CMPT 145 Course material
+# Copyright (c) 2017-2020 Michael C Horsch
+# All rights reserved.
+#
+# This document contains resources for homework assigned to students of
+# CMPT 145 and shall not be distributed without permission.  Posting this
+# file to a public or private website, or providing this file to a person
+# not registered in CMPT 145, constitutes Academic Misconduct, according
+# to the University of Saskatchewan Policy on Academic Misconduct.
+#
+# Synopsis:
+#   Defines some helpful functions for trees
+#
 
 def is_leaf(tnode):
     """
@@ -42,50 +54,3 @@ def to_string(tnode, level=0):
         if tnode.right is not None:
             result += '\n'+to_string(tnode.right, level+1)
         return result
-
-
-def subst(tnode, t, r):
-
-    '''Purpose: To substitute a target value t with a replacement value r wherever it
-     appears in the given tree
-
-     Pre-conditions: A target data value, a replacement value, a treenode
-
-     Post-conditions: Modifies tree node
-
-     Returns: None'''
-
-    if tnode is None:
-        return
-
-    else:
-
-        subst(tnode.left,t,r)
-
-        if tnode.data == t:
-
-            tnode.data = r
-
-        subst(tnode.right,t,r)
-
-def copy(tnode):
-
-    '''Purpose: To create an exact copy of the given tree, with completely new treenodes, but
-    exactly the same data values, in exactly the same place
-
-         Pre-conditions: A non-empty treenode
-
-         Post-conditions: None
-
-         Returns: A copy of a treennode'''
-
-    if tnode is None:
-        return None
-
-    else:
-
-        copyTree = treenode.treenode(tnode.data,tnode.left,tnode.right)
-        copy(tnode.left)
-        copy(tnode.right)
-
-        return copyTree
