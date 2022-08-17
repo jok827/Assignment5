@@ -71,7 +71,6 @@ expr_tree = tn.treenode('*',
 #TESTING FOR SUBST####################################################################
 
 q2.subst(expr_tree,'*','-')
-
 if not expr_tree.data == '-':
     print(f'Error in subst, Expected: - Result: {expr_tree.data}')
 
@@ -83,16 +82,32 @@ if not expr_tree.left.data == '+':
 
 
 q2.subst(mtree,'5','6')
-
 if mtree is not None:
-    print(f'Error in subst with empty string, Expected: None Result: {mtree.data}')
+    print(f'Error in subst with empty tree, Expected: None Result: {mtree.data}')
 
 q2.subst(ctree,'si','c')
-
 if not ctree.data == 'c':
-    print(f'Error in subst with single string, Expected: c Result: {mtree.data}')
+    print(f'Error in subst with single node, Expected: c Result: {mtree.data}')
 
 #####################################################################################
 
 
-#TESTING
+#TESTING FOR COPY####################################################################
+
+mtree_copy = q2.copy(mtree)
+
+if not mtree_copy is None:
+    print(f'Error in copy with empty tree, Expected: None Result: {mtree_copy}')
+
+ctree_copy = q2.copy(ctree)
+if not ctree_copy.data == ctree.data:
+    print(f'Error in copy with single node, Expected: {ctree.data} Result: {ctree_copy.data}')
+
+expr_tree_copy = q2.copy(expr_tree)
+if expr_tree_copy is expr_tree:
+    print('Error in copy, copy did not create a copy but instead referenced the other tree')
+
+if not expr_tree_copy.right == expr_tree.right:
+    print(f'Error in copy, Expected: {expr_tree.right} Result: {expr_tree_copy.right}')
+
+#####################################################################################

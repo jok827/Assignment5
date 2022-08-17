@@ -84,8 +84,28 @@ def copy(tnode):
 
     else:
 
-        copyTree = treenode.treenode(tnode.data,tnode.left,tnode.right)
+        copyTree = treenode(tnode.data,tnode.left,tnode.right)
         copy(tnode.left)
         copy(tnode.right)
 
         return copyTree
+
+
+def collect_data_inorder(tnode):
+
+    '''Purpose: To collect all the data values in the given tre
+
+         Pre-conditions: A non-empty treenode
+
+         Post-conditions: None
+
+         Returns: A list of treenode data in order'''
+
+    if tnode is None:
+        return None
+
+    else:
+
+        treeList = [collect_data_inorder(tnode.left),tnode.data,collect_data_inorder(tnode.right)]
+
+        return treeList
